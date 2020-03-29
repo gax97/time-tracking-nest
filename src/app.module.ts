@@ -10,18 +10,12 @@ import { OAuthAccessToken } from './shared/models/oAuthAccessToken.model';
 import { OAuthClient } from './shared/models/oAuthClient.model';
 import { TimeModule } from './modules/time/time.module';
 
+import {configService} from './shared/services/config.service';
 @Module({
 	imports: [
 		AuthModule,
 		SequelizeModule.forRoot({
-			dialect: 'postgres',
-			host: 'localhost',
-			port: 5432,
-			username: '',
-			password: '',
-			database: 'database2',
-			autoLoadModels: true,
-			synchronize: true,
+			...configService.getPostgresConfig(),
 			models: [User, Time, OAuthAccessToken, OAuthClient],
 		}),
 		UsersModule,
@@ -30,5 +24,4 @@ import { TimeModule } from './modules/time/time.module';
 	controllers: [AppController],
 	providers: [AppService],
 })
-export class AppModule {
-}
+export class AppModule { }
