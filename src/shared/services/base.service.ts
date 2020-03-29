@@ -1,13 +1,13 @@
 import { ModelCtor } from 'sequelize-typescript';
 
 export class BaseService {
-	private model: ModelCtor<any>;
+	private model: ModelCtor;
 
-	constructor(model){
+	constructor(model : ModelCtor){
 		this.model = model;
 	}
 
-	create(data){
-		this.model.create(data);
+	async create(data){
+		return this.model.create(data);
 	}
 }
