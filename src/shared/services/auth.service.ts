@@ -4,12 +4,10 @@ import {
 	HttpStatus,
 	UnauthorizedException,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
 import * as OAuth2Server from 'oauth2-server';
 import {OAuthClient} from '../models/oAuthClient.model';
 import {OAuthAccessToken} from '../models/oAuthAccessToken.model';
 import {User} from '../models/user.model';
-import {Time} from '../models/times.model';
 
 import {
 	AuthorizationCodeModel,
@@ -18,11 +16,8 @@ import {
 	PasswordModel,
 	RefreshTokenModel,
 } from 'oauth2-server';
-export class AuthService implements AuthorizationCodeModel, ExtensionModel, PasswordModel, RefreshTokenModel, ClientCredentialsModel{
 
-	create(data): any{
-		return OAuthClient.create(data);
-	}
+export class AuthService implements AuthorizationCodeModel, ExtensionModel, PasswordModel, RefreshTokenModel, ClientCredentialsModel{
 
 	getAccessToken(accessToken, callback): any {
 		OAuthAccessToken.findOne({

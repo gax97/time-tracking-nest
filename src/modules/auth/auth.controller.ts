@@ -52,7 +52,7 @@ export class AuthController {
 		if(user){
 			throw new BadRequestException(null, 'User already exists')
 		}
-		await this.userService.createUser({email, fullName, passwordPlain: password});
+		await this.userService.create({email, fullName, passwordPlain: password});
 
 		return {
 			success: true,
@@ -73,7 +73,6 @@ export class AuthController {
 	}
 	@Delete('sign-out')
 	async signOut(@Res() res: Response){
-		console.log(res.locals);
 		await this.authService.logout(res.locals.token.accessToken);
 		res.status(200).send()
 	}

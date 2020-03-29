@@ -1,7 +1,6 @@
-import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import * as sequelize from 'sequelize';
 import { User } from './user.model';
-import { OAuthClient } from './oAuthClient.model';
 
 @Table
 export class Time extends Model<Time> {
@@ -26,9 +25,7 @@ export class Time extends Model<Time> {
 	endTime: Date;
 
 	@Column({
-		type: DataType.STRING,
-		allowNull: true,
-		defaultValue: 'no-label'
+
 	})
 	label: string;
 

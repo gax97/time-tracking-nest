@@ -1,4 +1,4 @@
-import { BelongsTo, BelongsToMany, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 import * as sequelize from 'sequelize';
 import { Time } from './times.model';
@@ -47,4 +47,7 @@ export class User extends Model<User> {
 		type: DataType.STRING,
 	})
 	password: string;
+
+	@HasMany(()=> Time)
+	times: Time[];
 }

@@ -1,6 +1,5 @@
-import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import * as sequelize from 'sequelize';
-import { OAuthAccessToken } from './oAuthAccessToken.model';
 
 @Table
 export class OAuthClient extends Model<OAuthClient> {

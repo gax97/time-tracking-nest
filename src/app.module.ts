@@ -8,6 +8,7 @@ import { UsersModule } from './modules/user/user.module';
 import { Time } from './shared/models/times.model';
 import { OAuthAccessToken } from './shared/models/oAuthAccessToken.model';
 import { OAuthClient } from './shared/models/oAuthClient.model';
+import { TimeModule } from './modules/time/time.module';
 
 @Module({
 	imports: [
@@ -24,6 +25,7 @@ import { OAuthClient } from './shared/models/oAuthClient.model';
 			models: [User, Time, OAuthAccessToken, OAuthClient],
 		}),
 		UsersModule,
+		TimeModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

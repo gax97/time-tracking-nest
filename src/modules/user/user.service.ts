@@ -1,28 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from '../../shared/models/user.model';
+import { Time } from '../../shared/models/times.model';
+import { BaseService } from '../../shared/services/base.service';
 
 @Injectable()
-export class UsersService {
+export class UsersService extends BaseService{
 	constructor(
 		@InjectModel(User)
 		private userModel: typeof User,
-	) {}
-	async createUser(data){
-		return this.userModel.create(data);
+	) {
+		super(userModel);
 	}
-	async findAll(): Promise<User[]> {
-		return this.userModel.findAll();
-	}
-
-	findOne(id: string): Promise<User> {
-		return this.userModel.findOne({
-			where: {
-				id,
-			},
-		});
-	}
-	async getUserByEmail(email): Promise<User>{
+	async getUserByEmail(email : string): Promise<User>{
 		return this.userModel.findOne({
 			where: {
 				email: email
@@ -30,8 +20,18 @@ export class UsersService {
 		})
 	}
 
-	async remove(id: string): Promise<void> {
-		const user = await this.findOne(id);
-		await user.destroy();
+	async getUserByEmailWithStartTime(email : string) : Promise <User>{
+		return this.userModel.findOne({
+			where: {
+				email: email
+			},
+			include:[{
+				model: Time,
+				where: {
+					endTime: null,
+				},
+				required: false,
+			}]
+		})
 	}
 }
