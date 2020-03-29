@@ -1,4 +1,4 @@
-import { Column, DataType, Index, Model, Table, BelongsTo, ForeignKey, Association } from 'sequelize-typescript';
+import { Column, DataType, Index, Model, Table, BelongsTo, ForeignKey } from 'sequelize-typescript';
 import { User } from './user.model';
 import { OAuthClient } from './oAuthClient.model';
 

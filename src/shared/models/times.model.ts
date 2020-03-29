@@ -1,5 +1,7 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
 import * as sequelize from 'sequelize';
+import { User } from './user.model';
+import { OAuthClient } from './oAuthClient.model';
 
 @Table
 export class Time extends Model<Time> {
@@ -13,10 +15,6 @@ export class Time extends Model<Time> {
 	@Column({
 		type: DataType.DATE,
 		allowNull: false,
-		unique: 'Email address already in use!',
-		validate: {
-			isEmail: true,
-		},
 	})
 	startTime: Date;
 
@@ -33,4 +31,11 @@ export class Time extends Model<Time> {
 		defaultValue: 'no-label'
 	})
 	label: string;
+
+	@ForeignKey(()=> User)
+	userId: string;
+
+	@BelongsTo(() => User)
+	user: User;
+
 }

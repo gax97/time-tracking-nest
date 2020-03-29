@@ -1,11 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {
+	BadRequestException,
+	HttpException,
+	HttpStatus,
+	UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as OAuth2Server from 'oauth2-server';
 import {OAuthClient} from '../models/oAuthClient.model';
 import {OAuthAccessToken} from '../models/oAuthAccessToken.model';
 import {User} from '../models/user.model';
 import {Time} from '../models/times.model';
-import * as bcrypt from 'bcrypt';
+
 import {
 	AuthorizationCodeModel,
 	ClientCredentialsModel,
@@ -13,9 +18,8 @@ import {
 	PasswordModel,
 	RefreshTokenModel,
 } from 'oauth2-server';
-
-
 export class AuthService implements AuthorizationCodeModel, ExtensionModel, PasswordModel, RefreshTokenModel, ClientCredentialsModel{
+
 	create(data): any{
 		return OAuthClient.create(data);
 	}
@@ -29,13 +33,8 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 				{model: User}
 			],
 		}).then((token) => {
-			return callback(null, {user: {},
-					accessToken: '123',
-					accessTokenExpiresAt: new Date(),
-					refreshToken: '123',
-					refreshTokenExpiresAt: new Date()});
 			if (!token) {
-				return callback(new Error('Token is invalid'));
+				return callback(new UnauthorizedException(null, 'Token is invalid'));
 			}
 
 			return callback(null, {
@@ -43,7 +42,7 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 				accessToken: token.accessToken,
 				accessTokenExpiresAt: token.accessTokenExpiresAt,
 				refreshToken: token.refreshToken,
-				refreshTokenExpiresAt: token.refreshTokenExpires,
+				refreshTokenExpiresAt: null,
 			});
 		});
 	}
@@ -63,14 +62,14 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 			],
 		}).then((token) => {
 			if (!token) {
-				return callback(new Error('Refresh token is invalid'));
+				return callback(new HttpException('Refresh token is invalid', HttpStatus.BAD_REQUEST));
 			}
 
 			return callback(null, {
 				client: token.oAuthClient,
 				user: token.user,
 				refreshToken: token.refreshToken,
-				refreshTokenExpiresAt: token.refreshTokenExpires,
+				refreshTokenExpiresAt: null,
 				accessToken: token.accessToken,
 				accessTokenExpiresAt: token.refreshTokenExpires,
 			});
@@ -116,18 +115,13 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 			where: {
 				email: email
 			},
-			include: [{
-				model: Time,
-				where: {
-					endTime: null,
-				},
-				required: false
-			}
-			]
 
 		}).then((user) => {
-			if(!user || bcrypt.compareSync(user.password, password)) {
-				callback(new Error())
+			if(!user){
+				return callback(new BadRequestException('No such user'))
+			}
+			if(!user.isValidPassword(password)) {
+				return callback(new UnauthorizedException('Invalid password'))
 			}
 			callback(null, user)
 		})
@@ -147,8 +141,8 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 
 			// OAuthAccessToken.findAll().then((res)=>console.log("tokens", res));
 			callback(null, {
-				accessToken,
 				user,
+				accessToken,
 				client,
 			});
 		});
@@ -167,14 +161,18 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 	}
 
 	getAuthorizationCode(authorizationCode: string, callback?: (err?: any, result?: OAuth2Server.AuthorizationCode) => void): Promise<OAuth2Server.AuthorizationCode | OAuth2Server.Falsey> {
+		console.log("NOT HERE")
 		return undefined;
 	}
 
 	revokeAuthorizationCode(code: OAuth2Server.AuthorizationCode, callback?: (err?: any, result?: boolean) => void): Promise<boolean> {
+		console.log("NOT HERE")
 		return undefined;
 	}
 
 	saveAuthorizationCode(code: Pick<OAuth2Server.AuthorizationCode, "authorizationCode" | "expiresAt" | "redirectUri" | "scope">, client: OAuth2Server.Client, user: OAuth2Server.User, callback?: (err?: any, result?: OAuth2Server.AuthorizationCode) => void): Promise<OAuth2Server.AuthorizationCode | OAuth2Server.Falsey> {
+		console.log("NOT HERE")
 		return undefined;
+
 	}
 }

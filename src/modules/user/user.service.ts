@@ -8,7 +8,9 @@ export class UsersService {
 		@InjectModel(User)
 		private userModel: typeof User,
 	) {}
-
+	async createUser(data){
+		return this.userModel.create(data);
+	}
 	async findAll(): Promise<User[]> {
 		return this.userModel.findAll();
 	}
@@ -19,6 +21,13 @@ export class UsersService {
 				id,
 			},
 		});
+	}
+	async getUserByEmail(email): Promise<User>{
+		return this.userModel.findOne({
+			where: {
+				email: email
+			},
+		})
 	}
 
 	async remove(id: string): Promise<void> {

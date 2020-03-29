@@ -1,6 +1,7 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, BelongsToMany, Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 import * as sequelize from 'sequelize';
+import { Time } from './times.model';
 @Table
 export class User extends Model<User> {
 	@Column({
@@ -25,20 +26,25 @@ export class User extends Model<User> {
 	})
 	fullName: boolean;
 
+	isValidPassword(pw: string): boolean{
+		return bcrypt.compareSync(pw, this.getDataValue('password'));
+	}
+
 	@Column({
 		type: DataType.VIRTUAL,
-		set: function (value) {
-			this.setDataValue('password', bcrypt.hashSync(value, bcrypt.genSaltSync(10)));
-		},
 		validate: {
 			len: [8, 255],
 		},
 	})
-	passwordPlain: string;
+	set passwordPlain(value: string){
+		if(value.length < 8 || value.length > 255){
+			throw new Error("Validation error");
+		}
+		this.setDataValue('password', bcrypt.hashSync(value, bcrypt.genSaltSync(10)));
+	}
 
 	@Column({
 		type: DataType.STRING,
-		allowNull: true,
 	})
 	password: string;
 }
