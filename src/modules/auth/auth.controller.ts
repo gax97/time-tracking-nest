@@ -4,7 +4,7 @@ import {
 	Controller,
 	Delete, Get,
 	NotFoundException,
-	Post, Req, Res,
+	Post, Req, Res, UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from '../user/user.service';
 import { AuthService } from './auth.service';
@@ -42,7 +42,10 @@ export class AuthController {
 			password,
 			clientId,
 		} = signUpParameters;
-
+		console.log(email,
+			fullName,
+			password,
+			clientId,)
 		const client = await this.authService.getClient(clientId);
 
 		if(!client){
@@ -64,12 +67,19 @@ export class AuthController {
 		const request = new OAuth2Server.Request(req);
 		const response = new OAuth2Server.Response(res);
 
-		const data =  await oauth.token(request, response);
+		let data
+		try{
+			data =  await oauth.token(request, response);
+
+		}catch(e){
+			console.log(e.inner)
+			throw new UnauthorizedException(e.inner.message);
+		}
 		const returnData = {
 			message: 'ok',
 			token: data.accessToken,
 		};
-		res.status(200).send(returnData);
+		res.status(200).send(data);
 	}
 	@Delete('sign-out')
 	async signOut(@Res() res: Response){

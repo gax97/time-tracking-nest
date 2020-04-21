@@ -16,6 +16,7 @@ import {
 	PasswordModel,
 	RefreshTokenModel,
 } from 'oauth2-server';
+import { Time } from '../models/times.model';
 
 export class AuthService implements AuthorizationCodeModel, ExtensionModel, PasswordModel, RefreshTokenModel, ClientCredentialsModel{
 
@@ -110,6 +111,12 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 			where: {
 				email: email
 			},
+			include: [
+				{
+					model: Time
+				}
+			]
+
 
 		}).then((user) => {
 			if(!user){

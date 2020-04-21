@@ -30,6 +30,7 @@ export class TimeController {
 		});
 
 		// @ts-ignore
+		// time.belongsTo(user);
 		await user.addTime(time);
 		res.status(200).send({success: true, timerId: time.id})
 	}

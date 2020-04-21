@@ -7,9 +7,9 @@ import { ResponseFormatInterceptor } from './shared/interceptors/ResponseFormatI
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
-	app.useGlobalPipes(
-		new ValidationPipe({}),
-	);
+	// app.useGlobalPipes(
+	// 	new ValidationPipe({}),
+	// );
 
 	app.useGlobalFilters(new HttpExceptionFilter());
 

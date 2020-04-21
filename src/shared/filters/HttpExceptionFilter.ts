@@ -6,9 +6,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
 	catch(exception: HttpException, host: ArgumentsHost) {
 		const ctx = host.switchToHttp();
 		const response: Response = ctx.getResponse<Response>();
-		const request = ctx.getRequest<Request>();
+		const request: Request = ctx.getRequest<Request>();
 		const status = exception.getStatus();
-
 		response
 			.status(status)
 			.json({
@@ -16,6 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 				timestamp: new Date().toISOString(),
 				path: request.url,
 				message: exception.message,
+				stack: exception.stack,
 			});
 	}
 }

@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Time } from '../../shared/models/times.model';
-import { User } from '../../shared/models/user.model';
-import { Sequelize } from 'sequelize-typescript';
 import * as sequelize from 'sequelize';
 import { BaseService } from '../../shared/services/base.service';
 
