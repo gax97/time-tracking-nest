@@ -64,21 +64,12 @@ export class AuthController {
 	}
 	@Post('sign-in')
 	async signIn(@Req() req: Request, @Res() res: Response){
+
 		const request = new OAuth2Server.Request(req);
 		const response = new OAuth2Server.Response(res);
 
-		let data
-		try{
-			data =  await oauth.token(request, response);
+		const data = await oauth.token(request, response);
 
-		}catch(e){
-			console.log(e.inner)
-			throw new UnauthorizedException(e.inner.message);
-		}
-		const returnData = {
-			message: 'ok',
-			token: data.accessToken,
-		};
 		res.status(200).send(data);
 	}
 	@Delete('sign-out')

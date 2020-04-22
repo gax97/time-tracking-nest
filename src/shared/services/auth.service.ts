@@ -12,7 +12,7 @@ import {User} from '../models/user.model';
 import {
 	AuthorizationCodeModel,
 	ClientCredentialsModel,
-	ExtensionModel,
+	ExtensionModel, OAuthError,
 	PasswordModel,
 	RefreshTokenModel,
 } from 'oauth2-server';
@@ -120,12 +120,12 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 
 		}).then((user) => {
 			if(!user){
-				return callback(new BadRequestException('No such user'))
+				return callback(new OAuthError(undefined, {code: 404, message: 'No such user'}))
 			}
 			if(!user.isValidPassword(password)) {
-				return callback(new UnauthorizedException('Invalid password'))
+				return callback(new OAuthError(undefined, {code: 401, message: 'Invalid password'}))
 			}
-			callback(null, user)
+			return callback(null, user)
 		})
 
 	}
