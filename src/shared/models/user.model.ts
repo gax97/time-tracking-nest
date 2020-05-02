@@ -2,6 +2,7 @@ import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 import * as sequelize from 'sequelize';
 import { Time } from './times.model';
+import { BadRequestException } from '@nestjs/common';
 @Table
 export class User extends Model<User> {
 	@Column({
@@ -38,7 +39,7 @@ export class User extends Model<User> {
 	})
 	set passwordPlain(value: string){
 		if(value.length < 8 || value.length > 255){
-			throw new Error("Validation error");
+			throw new BadRequestException("Password must be at least 8 characters long");
 		}
 		this.setDataValue('password', bcrypt.hashSync(value, bcrypt.genSaltSync(10)));
 	}

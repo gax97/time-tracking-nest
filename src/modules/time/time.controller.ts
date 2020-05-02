@@ -9,10 +9,10 @@ export class TimeController {
 	constructor(private readonly userService: UsersService, private readonly timesService: TimeService){}
 
 	@Get('/')
-	getAll(@Res() res: Response){
+	async getAll(@Res() res: Response){
 		const userId = res.locals.token.user.id;
-		const data = this.timesService.getTimesFromUserIdDescending(userId);
-
+		const data = await this.timesService.getTimesFromUserIdDescending(userId);
+		console.log(data)
 		return res.send(data);
 	}
 	@Post('/clock-in/:label')
@@ -32,7 +32,7 @@ export class TimeController {
 		// @ts-ignore
 		// time.belongsTo(user);
 		await user.addTime(time);
-		res.status(200).send({success: true, timerId: time.id})
+		res.status(200).send({success: true, time})
 	}
 
 	@Post('/clock-out/:timerId')

@@ -23,7 +23,7 @@ class SignUpParameters{
 	fullName: string;
 
 	@IsNotEmpty()
-	@Length(8, 255)
+	@Length(8, 255, {message: "Password must bet at lest 8 characters long"})
 	password: string;
 
 	@IsNotEmpty()
