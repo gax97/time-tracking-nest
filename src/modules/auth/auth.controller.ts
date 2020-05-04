@@ -34,6 +34,7 @@ class SignUpParameters{
 export class AuthController {
 	constructor(private readonly userService: UsersService, private readonly authService: AuthService){}
 
+
 	@Post('sign-up')
 	async signUp(@Body() signUpParameters: SignUpParameters){
 		const {
