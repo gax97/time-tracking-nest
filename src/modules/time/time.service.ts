@@ -13,10 +13,11 @@ export class TimeService extends BaseService{
 		super(timeModel)
 	}
 
-	async create(data){
-		return this.timeModel.create(data);
-	}
-	async getTimesFromUserIdDescending(userId) {
+	/**
+	 * Find all user activities sorted by descending
+	 * @param userId - id of the user
+	 */
+	async getTimesFromUserIdDescending(userId: string) : Promise<Time[]> {
 		return this.timeModel.findAll({
 			where: {
 				userId: userId,
@@ -29,7 +30,12 @@ export class TimeService extends BaseService{
 			]
 		})
 	}
-	async  getTimeFromId(id) {
+
+	/**
+	 * Find particular activity
+	 * @param id - id of the timer
+	 */
+	async getTimeFromId(id) : Promise<Time>{
 		return this.timeModel.findOne({
 			where: {
 				id: id,

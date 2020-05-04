@@ -2,9 +2,9 @@ import {
 	BadRequestException,
 	Body,
 	Controller,
-	Delete, Get,
+	Delete,
 	NotFoundException,
-	Post, Req, Res, UnauthorizedException,
+	Post, Req, Res,
 } from '@nestjs/common';
 import { UsersService } from '../user/user.service';
 import { AuthService } from './auth.service';
@@ -32,9 +32,15 @@ class SignUpParameters{
 
 @Controller('auth')
 export class AuthController {
-	constructor(private readonly userService: UsersService, private readonly authService: AuthService){}
+	constructor(
+		private readonly userService: UsersService,
+		private readonly authService: AuthService
+	){}
 
-
+	/**
+	 * Sign up a user.
+	 * @param signUpParameters
+	 */
 	@Post('sign-up')
 	async signUp(@Body() signUpParameters: SignUpParameters){
 		const {
@@ -63,6 +69,12 @@ export class AuthController {
 			message: 'ok'
 		};
 	}
+
+	/**
+	 * Sign in a user
+	 * @param req - Http request object
+	 * @param res - Http response object
+	 */
 	@Post('sign-in')
 	async signIn(@Req() req: Request, @Res() res: Response){
 
@@ -73,6 +85,11 @@ export class AuthController {
 
 		res.status(200).send(data);
 	}
+
+	/**
+	 * Sign out a user
+	 * @param res - Http response object
+	 */
 	@Delete('sign-out')
 	async signOut(@Res() res: Response){
 		await this.authService.logout(res.locals.token.accessToken);

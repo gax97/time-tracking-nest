@@ -1,5 +1,4 @@
 import {
-	BadRequestException,
 	HttpException,
 	HttpStatus,
 	UnauthorizedException,
@@ -18,8 +17,16 @@ import {
 } from 'oauth2-server';
 import { Time } from '../models/times.model';
 
+/**
+ * Auth service implements all interfaces required by oauth2-server in order to setup oAuth2 server.
+ */
 export class AuthService implements AuthorizationCodeModel, ExtensionModel, PasswordModel, RefreshTokenModel, ClientCredentialsModel{
 
+	/**
+	 *
+	 * @param {string} accessToken - id of the accessToken
+	 * @param {OAuth2Server.Callback} callback - callback to be executed on success
+	 */
 	getAccessToken(accessToken, callback): any {
 		OAuthAccessToken.findOne({
 			where: {
@@ -43,6 +50,11 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 		});
 	}
 
+	/**
+	 * Retrieve users refresh token if it valid
+	 * @param {string} refreshToken - id of the refresh token
+	 * @param {OAuth2Server.Callback} callback - callback to be executed on success
+	 */
 	getRefreshToken(refreshToken, callback) : any{
 		OAuthAccessToken.findOne({
 			where: {
@@ -72,6 +84,11 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 		});
 	}
 
+	/**
+	 * Destroy user's token by expiring it.
+	 * @param {OAuthAccessToken} accessToken - accessToken model.
+	 * @param {OAuth2Server.Callback} callback - callback to be executed on success.
+	 */
 	revokeToken(accessToken, callback) : any{
 		OAuthAccessToken.update({
 			accessTokenExpiresAt: 0,
@@ -86,6 +103,12 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 		});
 	}
 
+	/**
+	 * Retrieve single client
+	 * @param clientId - id of the Client
+	 * @param clientSecret - client secret
+	 * @param callback - callback to be executed on success
+	 */
 	getClient(clientId: string, clientSecret:string, callback?: any): any {
 		return OAuthClient.findOne({
 			where: {
@@ -99,14 +122,22 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 		})
 	}
 
+	/**
+	 * Return "dummy" user that belongs to this client
+	 */
 	getUserFromClient(clientId, callback) : any{
 		callback(null, {
 			userId: '00000000-0000-0000-0000-000000000000',
 		});
 	}
 
+	/**
+	 * Retrieve single user by email and password
+	 * @param {string} email - users email
+	 * @param {string} password - users password
+	 * @param {function} callback - function to be executed on success
+	 */
 	getUser(email, password, callback): any {
-
 		User.findOne({
 			where: {
 				email: email
@@ -116,8 +147,6 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 					model: Time
 				}
 			]
-
-
 		}).then((user) => {
 			if(!user){
 				return callback(new OAuthError(undefined, {code: 404, message: 'No such user'}))
@@ -127,11 +156,16 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 			}
 			return callback(null, user)
 		})
-
 	}
 
+	/**
+	 * Saves access token to the database. If accessToken with the same id exists it will be replaced with a new one.
+	 * @param {OAuthAccessToken} accessToken - created access token
+	 * @param {OAuthClient} client - oAuth client
+	 * @param {User} user
+	 * @param {function} callback - callback to be executed on success
+	 */
 	saveToken(accessToken, client, user, callback) : any{
-
 		OAuthAccessToken.upsert({
 			accessToken: accessToken.accessToken,
 			refreshToken: accessToken.refreshToken,
@@ -140,8 +174,6 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 			oAuthClientId: client.id,
 			userId: user.id,
 		}).then(() => {
-
-			// OAuthAccessToken.findAll().then((res)=>console.log("tokens", res));
 			callback(null, {
 				user,
 				accessToken,
@@ -150,31 +182,45 @@ export class AuthService implements AuthorizationCodeModel, ExtensionModel, Pass
 		});
 	}
 
+	/**
+	 * @ignore
+	 */
 	verifyScope(scope, callback) : any{
 		callback(null, true);
 	}
 
+	/**
+	 * @ignore
+	 */
 	static getAuthCode() {
 		throw new Error();
 	}
 
+	/**
+	 * @ignore
+	 */
 	static saveAuthCode() {
 		throw new Error();
 	}
 
+	/**
+	 * @ignore
+	 */
 	getAuthorizationCode(authorizationCode: string, callback?: (err?: any, result?: OAuth2Server.AuthorizationCode) => void): Promise<OAuth2Server.AuthorizationCode | OAuth2Server.Falsey> {
-		console.log("NOT HERE")
 		return undefined;
 	}
 
+	/**
+	 * @ignore
+	 */
 	revokeAuthorizationCode(code: OAuth2Server.AuthorizationCode, callback?: (err?: any, result?: boolean) => void): Promise<boolean> {
-		console.log("NOT HERE")
 		return undefined;
 	}
 
+	/**
+	 * @ignore
+	 */
 	saveAuthorizationCode(code: Pick<OAuth2Server.AuthorizationCode, "authorizationCode" | "expiresAt" | "redirectUri" | "scope">, client: OAuth2Server.Client, user: OAuth2Server.User, callback?: (err?: any, result?: OAuth2Server.AuthorizationCode) => void): Promise<OAuth2Server.AuthorizationCode | OAuth2Server.Falsey> {
-		console.log("NOT HERE")
 		return undefined;
-
 	}
 }
