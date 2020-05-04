@@ -1,8 +1,8 @@
 {
   "name": "nesttest",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.0.2",
+  "description": "Student project",
+  "author": "Данило Гачевић",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "doc": "npx compodoc -p tsconfig.json -s --port 8888 --output './docs/'"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.6",
@@ -43,6 +44,7 @@
     "sequelize-typescript": "^1.1.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",

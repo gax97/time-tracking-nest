@@ -1,9 +1,8 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TimeService } from './time.service';
 import { TimeController } from './time.controller';
 import { UsersModule } from '../user/user.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from '../../shared/models/user.model';
 import { Time } from '../../shared/models/times.model';
 import { authenticateUser } from '../../shared/middleware/auth';
 

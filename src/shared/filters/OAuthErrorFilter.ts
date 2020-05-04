@@ -2,6 +2,10 @@ import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { OAuthError } from 'oauth2-server'
 
+/**
+ * Exception filter for OAuthErrors.
+ * These errors can happen during user validation, creation, deletion or during update of the user information.
+ */
 @Catch(OAuthError)
 export class OAuthErrorFilter implements ExceptionFilter {
 	catch(exception: OAuthError, host: ArgumentsHost) {

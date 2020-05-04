@@ -2,6 +2,9 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize
 import * as sequelize from 'sequelize';
 import { User } from './user.model';
 
+/**
+ * Represents single activity that belongs to a single user.
+ */
 @Table
 export class Time extends Model<Time> {
 	@Column({

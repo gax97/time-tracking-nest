@@ -2,6 +2,9 @@ import { Column, DataType, Index, Model, Table, BelongsTo, ForeignKey } from 'se
 import { User } from './user.model';
 import { OAuthClient } from './oAuthClient.model';
 
+/**
+ * Represents AccessToken that belongs to single user.
+ */
 @Table
 export class OAuthAccessToken extends Model<OAuthAccessToken> {
 	@Column({

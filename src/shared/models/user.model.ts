@@ -3,6 +3,10 @@ import * as bcrypt from 'bcrypt';
 import * as sequelize from 'sequelize';
 import { Time } from './times.model';
 import { BadRequestException } from '@nestjs/common';
+
+/**
+ * Represents single user.
+ */
 @Table
 export class User extends Model<User> {
 	@Column({
