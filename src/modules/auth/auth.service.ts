@@ -17,6 +17,10 @@ export class AuthService {
 
 	}
 
+	/**
+	 * Find single client.
+	 * @param clientId - id of the client
+	 */
 	async getClient(clientId: string): Promise<OAuthClient>{
 		return this.clientModel.findOne({
 			where: {
@@ -25,6 +29,10 @@ export class AuthService {
 		});
 	}
 
+	/**
+	 * Logout user
+	 * @param token - token to be destroyed with the logout
+	 */
 	async logout(token: string): Promise<boolean>{
 		const deletedTokens = await this.tokenModel.destroy({
 			where: {

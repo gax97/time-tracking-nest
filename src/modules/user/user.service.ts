@@ -12,6 +12,11 @@ export class UsersService extends BaseService{
 	) {
 		super(userModel);
 	}
+
+	/**
+	 * Retrieve single user by his email address
+	 * @param email - email of the user
+	 */
 	async getUserByEmail(email : string): Promise<User>{
 		return this.userModel.findOne({
 			where: {
@@ -20,6 +25,10 @@ export class UsersService extends BaseService{
 		})
 	}
 
+	/**
+	 * Retrieve single user by his email with his activity that is currently in progress
+	 * @param email - email of the user
+	 */
 	async getUserByEmailWithStartTime(email : string) : Promise <User>{
 		return this.userModel.findOne({
 			where: {

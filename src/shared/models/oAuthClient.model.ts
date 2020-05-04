@@ -1,6 +1,10 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import * as sequelize from 'sequelize';
 
+/**
+ * Represents OAuthClient
+ * Only registered clients can have access to the API.
+ */
 @Table
 export class OAuthClient extends Model<OAuthClient> {
 	@Column({
