@@ -194,14 +194,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/modules/user/user.service.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/modules/user/user.service.ts:20</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Retrieve single user by his email address</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -211,6 +213,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -225,6 +228,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>email of the user</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -266,14 +275,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/modules/user/user.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/modules/user/user.service.ts:32</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Retrieve single user by his email with his activity that is currently in progress</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -283,6 +294,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -297,6 +309,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>email of the user</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -344,7 +362,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:10</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:15</a></code>
 </div>
                 </td>
             </tr>
@@ -352,6 +370,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Create instance of the model</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -421,7 +441,7 @@
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:4</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:5</a></code>
 </div>
                             </td>
                         </tr>
@@ -449,6 +469,11 @@ export class UsersService extends BaseService{
 	) {
 		super(userModel);
 	}
+
+	/**
+	 * Retrieve single user by his email address
+	 * @param email - email of the user
+	 */
 	async getUserByEmail(email : string): Promise&lt;User&gt;{
 		return this.userModel.findOne({
 			where: {
@@ -457,6 +482,10 @@ export class UsersService extends BaseService{
 		})
 	}
 
+	/**
+	 * Retrieve single user by his email with his activity that is currently in progress
+	 * @param email - email of the user
+	 */
 	async getUserByEmailWithStartTime(email : string) : Promise &lt;User&gt;{
 		return this.userModel.findOne({
 			where: {

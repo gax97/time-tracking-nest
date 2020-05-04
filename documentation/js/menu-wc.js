@@ -125,13 +125,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/TimeModule.html" data-type="entity-link">TimeModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#controllers-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' : 'data-target="#xs-controllers-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' }>
+                                            'data-target="#controllers-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' : 'data-target="#xs-controllers-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' }>
                                             <span class="icon ion-md-swap"></span>
                                             <span>Controllers</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' :
-                                            'id="xs-controllers-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' :
+                                            'id="xs-controllers-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' }>
                                             <li class="link">
                                                 <a href="controllers/TimeController.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">TimeController</a>
@@ -140,13 +140,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' : 'data-target="#xs-injectables-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' }>
+                                        'data-target="#injectables-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' : 'data-target="#xs-injectables-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' :
-                                        'id="xs-injectables-links-module-TimeModule-ef3ff6c4b8deb012f61a0732ccc5203a"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' :
+                                        'id="xs-injectables-links-module-TimeModule-9e28d98efd5655a0b852fa8fd2269b6f"' }>
                                         <li class="link">
                                             <a href="injectables/TimeService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>TimeService</a>

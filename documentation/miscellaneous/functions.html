@@ -96,6 +96,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Middleware for token validation</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -104,6 +106,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,6 +118,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>http request object</li>
+</ul>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>res</td>
@@ -124,6 +133,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>http response object</li>
+</ul>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>next</td>
@@ -133,6 +148,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>next function in middleware to call after successful token validation</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

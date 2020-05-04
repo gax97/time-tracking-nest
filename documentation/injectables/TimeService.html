@@ -98,10 +98,6 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#create">create</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#getTimeFromId">getTimeFromId</a>
                             </li>
                             <li>
@@ -178,74 +174,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Async</span>
-                            create
-                        </b>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(data)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/modules/time/time.service.ts:16</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>data</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getTimeFromId"></a>
                     <span class="name">
                         <b>
@@ -266,14 +194,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/modules/time/time.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/modules/time/time.service.ts:38</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Find particular activity</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -282,6 +212,7 @@
                                 <tr>
                                     <td>Name</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -293,6 +224,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>id of the timer</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -300,7 +237,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../classes/Time.html" target="_self" >Promise&lt;Time&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -327,21 +264,23 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getTimesFromUserIdDescending(userId)</code>
+                    <code>getTimesFromUserIdDescending(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/modules/time/time.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/modules/time/time.service.ts:20</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Find all user activities sorted by descending</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -349,18 +288,29 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
                                     <td>
                                         No
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>id of the user</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -368,7 +318,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../classes/Time.html" target="_self" >Promise&lt;Time[]&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -408,7 +358,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:10</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:15</a></code>
 </div>
                 </td>
             </tr>
@@ -416,6 +366,8 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Create instance of the model</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -485,7 +437,7 @@
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:4</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseService.html#source" target="_self" >BaseService:5</a></code>
 </div>
                             </td>
                         </tr>
@@ -514,10 +466,11 @@ export class TimeService extends BaseService{
 		super(timeModel)
 	}
 
-	async create(data){
-		return this.timeModel.create(data);
-	}
-	async getTimesFromUserIdDescending(userId) {
+	/**
+	 * Find all user activities sorted by descending
+	 * @param userId - id of the user
+	 */
+	async getTimesFromUserIdDescending(userId: string) : Promise&lt;Time[]&gt; {
 		return this.timeModel.findAll({
 			where: {
 				userId: userId,
@@ -530,7 +483,12 @@ export class TimeService extends BaseService{
 			]
 		})
 	}
-	async  getTimeFromId(id) {
+
+	/**
+	 * Find particular activity
+	 * @param id - id of the timer
+	 */
+	async getTimeFromId(id) : Promise&lt;Time&gt;{
 		return this.timeModel.findOne({
 			where: {
 				id: id,

@@ -141,14 +141,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="67"
-                            class="link-to-prism">src/modules/auth/auth.controller.ts:67</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="79"
+                            class="link-to-prism">src/modules/auth/auth.controller.ts:79</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Sign in a user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -158,6 +160,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,6 +175,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>Http request object</li>
+</ul>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>res</td>
@@ -184,6 +193,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>Http response object</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -232,14 +247,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/modules/auth/auth.controller.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/modules/auth/auth.controller.ts:94</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Sign out a user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -249,6 +266,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -263,6 +281,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>Http response object</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -311,14 +335,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/modules/auth/auth.controller.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/modules/auth/auth.controller.ts:45</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Sign up a user.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -367,9 +393,9 @@
 	BadRequestException,
 	Body,
 	Controller,
-	Delete, Get,
+	Delete,
 	NotFoundException,
-	Post, Req, Res, UnauthorizedException,
+	Post, Req, Res,
 } from &#x27;@nestjs/common&#x27;;
 import { UsersService } from &#x27;../user/user.service&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
@@ -397,9 +423,15 @@ class SignUpParameters{
 
 @Controller(&#x27;auth&#x27;)
 export class AuthController {
-	constructor(private readonly userService: UsersService, private readonly authService: AuthService){}
+	constructor(
+		private readonly userService: UsersService,
+		private readonly authService: AuthService
+	){}
 
-
+	/**
+	 * Sign up a user.
+	 * @param signUpParameters
+	 */
 	@Post(&#x27;sign-up&#x27;)
 	async signUp(@Body() signUpParameters: SignUpParameters){
 		const {
@@ -428,6 +460,12 @@ export class AuthController {
 			message: &#x27;ok&#x27;
 		};
 	}
+
+	/**
+	 * Sign in a user
+	 * @param req - Http request object
+	 * @param res - Http response object
+	 */
 	@Post(&#x27;sign-in&#x27;)
 	async signIn(@Req() req: Request, @Res() res: Response){
 
@@ -438,6 +476,11 @@ export class AuthController {
 
 		res.status(200).send(data);
 	}
+
+	/**
+	 * Sign out a user
+	 * @param res - Http response object
+	 */
 	@Delete(&#x27;sign-out&#x27;)
 	async signOut(@Res() res: Response){
 		await this.authService.logout(res.locals.token.accessToken);

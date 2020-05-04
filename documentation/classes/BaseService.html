@@ -122,7 +122,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/shared/services/base.service.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/shared/services/base.service.ts:5</a></div>
                             </td>
                         </tr>
 
@@ -186,7 +186,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/shared/services/base.service.ts:4</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/shared/services/base.service.ts:5</a></div>
                             </td>
                         </tr>
 
@@ -224,14 +224,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="10"
-                            class="link-to-prism">src/shared/services/base.service.ts:10</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/shared/services/base.service.ts:15</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Create instance of the model</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -281,12 +283,17 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ModelCtor } from &#x27;sequelize-typescript&#x27;;
 
 export class BaseService {
+
 	private model: ModelCtor;
 
 	constructor(model : ModelCtor){
 		this.model &#x3D; model;
 	}
 
+	/**
+	 * Create instance of the model
+	 * @param data
+	 */
 	async create(data){
 		return this.model.create(data);
 	}

@@ -141,15 +141,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/modules/time/time.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/modules/time/time.controller.ts:28</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Start single activity e.g.</p>
+                    <div class="io-description"><p>Start single activity</p>
 </div>
 
                     <div class="io-description">
@@ -247,8 +247,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/modules/time/time.controller.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/modules/time/time.controller.ts:51</a></div>
                 </td>
             </tr>
 
@@ -414,12 +414,11 @@ export class TimeController {
 	async getAll(@Res() res: Response){
 		const userId &#x3D; res.locals.token.user.id;
 		const data &#x3D; await this.timesService.getTimesFromUserIdDescending(userId);
-		console.log(data)
 		return res.send(data);
 	}
 
 	/**
-	 * Start single activity e.g.
+	 * Start single activity
 	 * @param label - label or the name of the activity
 	 * @param res - response object used to get current authenticated user
 	 */

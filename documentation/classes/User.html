@@ -63,6 +63,13 @@
             <code>src/shared/models/user.model.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents single user.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -176,7 +183,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/shared/models/user.model.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/shared/models/user.model.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -212,7 +219,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/shared/models/user.model.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/shared/models/user.model.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -248,7 +255,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/shared/models/user.model.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/shared/models/user.model.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -284,7 +291,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/shared/models/user.model.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/shared/models/user.model.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -320,7 +327,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/shared/models/user.model.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/shared/models/user.model.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -356,8 +363,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/shared/models/user.model.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/shared/models/user.model.ts:34</a></div>
                 </td>
             </tr>
 
@@ -431,7 +438,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/shared/models/user.model.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/shared/models/user.model.ts:44</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -483,6 +490,10 @@ import * as bcrypt from &#x27;bcrypt&#x27;;
 import * as sequelize from &#x27;sequelize&#x27;;
 import { Time } from &#x27;./times.model&#x27;;
 import { BadRequestException } from &#x27;@nestjs/common&#x27;;
+
+/**
+ * Represents single user.
+ */
 @Table
 export class User extends Model&lt;User&gt; {
 	@Column({

@@ -63,6 +63,14 @@
             <code>src/shared/filters/OAuthErrorFilter.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Exception filter for OAuthErrors.
+These errors can happen during user validation, creation, deletion or during update of the user information.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -130,8 +138,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="7"
-                            class="link-to-prism">src/shared/filters/OAuthErrorFilter.ts:7</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="11"
+                            class="link-to-prism">src/shared/filters/OAuthErrorFilter.ts:11</a></div>
                 </td>
             </tr>
 
@@ -204,6 +212,10 @@
 import { Request, Response } from &#x27;express&#x27;;
 import { OAuthError } from &#x27;oauth2-server&#x27;
 
+/**
+ * Exception filter for OAuthErrors.
+ * These errors can happen during user validation, creation, deletion or during update of the user information.
+ */
 @Catch(OAuthError)
 export class OAuthErrorFilter implements ExceptionFilter {
 	catch(exception: OAuthError, host: ArgumentsHost) {

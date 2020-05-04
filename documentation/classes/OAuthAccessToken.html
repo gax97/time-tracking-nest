@@ -63,6 +63,13 @@
             <code>src/shared/models/oAuthAccessToken.model.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Represents AccessToken that belongs to single user.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -157,7 +164,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -193,7 +200,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -229,7 +236,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -265,7 +272,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -301,7 +308,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -337,7 +344,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -373,7 +380,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -409,7 +416,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/shared/models/oAuthAccessToken.model.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -432,6 +439,9 @@
 import { User } from &#x27;./user.model&#x27;;
 import { OAuthClient } from &#x27;./oAuthClient.model&#x27;;
 
+/**
+ * Represents AccessToken that belongs to single user.
+ */
 @Table
 export class OAuthAccessToken extends Model&lt;OAuthAccessToken&gt; {
 	@Column({

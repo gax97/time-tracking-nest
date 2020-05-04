@@ -187,14 +187,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/modules/auth/auth.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/modules/auth/auth.service.ts:24</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Find single client.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -204,6 +206,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -218,6 +221,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>id of the client</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -259,14 +268,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/modules/auth/auth.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/modules/auth/auth.service.ts:36</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Logout user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -276,6 +287,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -290,6 +302,12 @@
                                     </td>
 
 
+                                    <td>
+                                        <ul>
+<li>token to be destroyed with the logout</li>
+</ul>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -332,6 +350,10 @@ export class AuthService {
 
 	}
 
+	/**
+	 * Find single client.
+	 * @param clientId - id of the client
+	 */
 	async getClient(clientId: string): Promise&lt;OAuthClient&gt;{
 		return this.clientModel.findOne({
 			where: {
@@ -340,6 +362,10 @@ export class AuthService {
 		});
 	}
 
+	/**
+	 * Logout user
+	 * @param token - token to be destroyed with the logout
+	 */
 	async logout(token: string): Promise&lt;boolean&gt;{
 		const deletedTokens &#x3D; await this.tokenModel.destroy({
 			where: {
