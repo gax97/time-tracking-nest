@@ -29,6 +29,9 @@ class ConfigService {
 		return mode != 'DEV';
 	}
 
+	/**
+	 * Retrieve postgres config for production and development
+	 */
 	public getPostgresConfig(): SequelizeModuleOptions {
 		return {
 			dialect: 'postgres',
@@ -37,6 +40,22 @@ class ConfigService {
 			username: this.getValue('POSTGRES_USERNAME'),
 			password: this.getValue('POSTGRES_PASSWORD'),
 			database: this.getValue('POSTGRES_DATABASE'),
+			autoLoadModels: this.getValue('POSTGRES_AUTO_LOAD_MODELS') === 'true',
+			synchronize: this.getValue('POSTGRES_SYNCRONIZE') === 'true',
+		};
+	}
+
+	/**
+	 * Retrieve postgres config for testing
+	 */
+	public getTestPostgresConfig(): SequelizeModuleOptions {
+		return {
+			dialect: 'postgres',
+			host: this.getValue('POSTGRES_HOST'),
+			port: parseInt(this.getValue('POSTGRES_PORT')),
+			username: this.getValue('POSTGRES_USERNAME'),
+			password: this.getValue('POSTGRES_PASSWORD'),
+			database: 'database_test',
 			autoLoadModels: this.getValue('POSTGRES_AUTO_LOAD_MODELS') === 'true',
 			synchronize: this.getValue('POSTGRES_SYNCRONIZE') === 'true',
 		};

@@ -1,4 +1,4 @@
-#Student project
+## Student project
 Author: Danilo Gačević
 
 ## Description
