@@ -17,6 +17,9 @@ export class AuthService {
 
 	}
 
+	createClient(){
+		return this.clientModel.create({})
+	}
 	/**
 	 * Find single client.
 	 * @param clientId - id of the client

@@ -1,4 +1,4 @@
-import { ModelCtor, Model } from 'sequelize-typescript';
+import { ModelCtor } from 'sequelize-typescript';
 
 export abstract class BaseService {
 
