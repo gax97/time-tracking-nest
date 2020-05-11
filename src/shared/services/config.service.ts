@@ -56,8 +56,8 @@ class ConfigService {
 			username: this.getValue('POSTGRES_USERNAME'),
 			password: this.getValue('POSTGRES_PASSWORD'),
 			database: 'database_test',
-			autoLoadModels: this.getValue('POSTGRES_AUTO_LOAD_MODELS') === 'true',
-			synchronize: this.getValue('POSTGRES_SYNCRONIZE') === 'true',
+			autoLoadModels: true,
+			synchronize: true,
 		};
 	}
 
@@ -72,6 +72,7 @@ const configService = new ConfigService(process.env)
 		'POSTGRES_DATABASE',
 		'POSTGRES_AUTO_LOAD_MODELS',
 		'POSTGRES_SYNCRONIZE',
+		'PORT',
 	]);
 
 export { configService };

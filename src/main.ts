@@ -4,7 +4,11 @@ import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './shared/filters/HttpExceptionFilter';
 import { ResponseFormatInterceptor } from './shared/interceptors/ResponseFormatInterceptor';
 import { OAuthErrorFilter } from './shared/filters/OAuthErrorFilter';
+import { configService } from './shared/services/config.service';
 
+/**
+ * Application entry point
+ */
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
@@ -16,6 +20,6 @@ async function bootstrap() {
 
 	app.useGlobalInterceptors(new ResponseFormatInterceptor());
 
-	await app.listen(3000);
+	await app.listen(configService.getPort());
 }
 bootstrap();

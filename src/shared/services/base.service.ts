@@ -1,10 +1,10 @@
-import { ModelCtor } from 'sequelize-typescript';
+import { ModelCtor, Model } from 'sequelize-typescript';
 
-export class BaseService {
+export abstract class BaseService {
 
 	private model: ModelCtor;
 
-	constructor(model : ModelCtor){
+	protected constructor(model : ModelCtor){
 		this.model = model;
 	}
 
@@ -12,7 +12,7 @@ export class BaseService {
 	 * Create instance of the model
 	 * @param data
 	 */
-	async create(data){
+	create(data): any{
 		return this.model.create(data);
 	}
 }
