@@ -15,8 +15,7 @@ export class TimeController {
 	@Get('/')
 	async getAll(@Res() res: Response){
 		const userId = res.locals.token.user.id;
-		const data = await this.timesService.getTimesFromUserIdDescending(userId);
-		return res.send(data);
+		return await this.timesService.getTimesFromUserIdDescending(userId);
 	}
 
 	/**

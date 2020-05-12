@@ -1,6 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TimeService } from '../../time/time.service';
-import { UsersService } from '../../user/user.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { configService } from '../../../shared/services/config.service';
 import { Time } from '../../../shared/models/times.model';
