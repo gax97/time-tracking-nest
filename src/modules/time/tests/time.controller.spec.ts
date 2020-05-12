@@ -8,8 +8,6 @@ import { Time } from '../../../shared/models/times.model';
 import { User } from '../../../shared/models/user.model';
 import { NestApplication } from '@nestjs/core';
 import moment = require('moment');
-import * as request from 'supertest';
-import { Response } from 'express';
 
 describe('Time Controller', () => {
 	let controller: TimeController;
@@ -73,6 +71,85 @@ describe('Time Controller', () => {
 			expect(data).toBeDefined();
 			expect(data.length).toBeGreaterThanOrEqual(1);
 			expect(data[0].id).toBe(time.id);
+		});
+		it('should throw error', async () => {
+			// @ts-ignore mock logged out user id
+			controller.getAll({ locals: { token: null } }).catch(error => {
+				expect(error).toBeDefined();
+				expect(error.response.statusCode).toBe(401);
+				expect(error.response.error).toBe('Unauthorized');
+			});
+		});
+		describe('path /time/clock-in/:label (POST)', () => {
+			it('should return new time', async () => {
+				// @ts-ignore mock logged in user
+				const response = await controller.clockIn('test-label', {
+					locals: { token: { user: { email: user.email } } },
+				});
+				expect(response.success).toBe(true);
+				expect(response.time).toBeDefined();
+				expect(response.time.id).toBeDefined();
+				expect(response.time.endTime).toBeNull();
+				expect(response.time.label).toBe('test-label');
+				// expect(user.times.length).toBeGreaterThanOrEqual(2);
+			});
+			it('should throw unauthorized error', () => {
+				controller
+					// @ts-ignore mock logged out user
+					.clockIn('test-label', {
+						locals: { token: null },
+					})
+					.catch(error => {
+						expect(error).toBeDefined();
+						expect(error.response.statusCode).toBe(401);
+						expect(error.response.error).toBe('Unauthorized');
+					});
+			});
+
+			it('should throw bad request error', async () => {
+				const unfinishedTime = await timeService.create({
+					startTime: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+					endTime: null,
+				});
+				await user.addTime(unfinishedTime);
+
+				controller
+					// @ts-ignore mock logged in user
+					.clockIn('test-label', {
+						locals: { token: { user: { email: user.email } } },
+					})
+					.catch(error => {
+						expect(error).toBeDefined();
+						expect(error.response.statusCode).toBe(400);
+						expect(error.response.error).toBe('Bad request');
+					});
+			});
+		});
+		describe('path /time/clock-out/:timerId (POST)', () => {
+			let unfinishedTime;
+			beforeEach(async () => {
+				unfinishedTime = await timeService.create({
+					startTime: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
+					endTime: null,
+				});
+				await user.addTime(unfinishedTime);
+			});
+			it('should throw bad request error', () => {
+				// wrong time id
+				controller
+					.clockOut('7565d992-ce3b-467a-b558-dcb4fccc3329')
+					.catch(error => {
+						console.log(error);
+						expect(error).toBeDefined();
+						expect(error.response.statusCode).toBe(400);
+						expect(error.response.error).toBe('Bad request');
+					});
+			});
+			it('should return finished time object', async () => {
+				const response = await controller.clockOut(unfinishedTime.id);
+				expect(response.success).toBe(true);
+				expect(response.timerId).toBe(unfinishedTime.id);
+			});
 		});
 	});
 });
