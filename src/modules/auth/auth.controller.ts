@@ -40,6 +40,8 @@ export class AuthController {
 	/**
 	 * Sign up a user.
 	 * @param signUpParameters
+	 * @throws NotFoundException
+	 * @throws BadRequestException
 	 */
 	@Post('sign-up')
 	async signUp(@Body() signUpParameters: SignUpParameters){
@@ -49,10 +51,6 @@ export class AuthController {
 			password,
 			clientId,
 		} = signUpParameters;
-		console.log(email,
-			fullName,
-			password,
-			clientId,)
 		const client = await this.authService.getClient(clientId);
 
 		if(!client){

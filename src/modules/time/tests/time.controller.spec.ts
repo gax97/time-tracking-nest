@@ -60,7 +60,8 @@ describe('Time Controller', () => {
 		});
 
 		afterEach(async () => {
-			await Promise.all([user.destroy(), time.destroy()]);
+			await user.destroy();
+			await time.destroy();
 		});
 
 		it('should return list of times', async () => {
@@ -81,48 +82,56 @@ describe('Time Controller', () => {
 			});
 		});
 		describe('path /time/clock-in/:label (POST)', () => {
+			let unfinishedTime;
 			it('should return new time', async () => {
 				// @ts-ignore mock logged in user
-				const response = await controller.clockIn('test-label', {
+				const response = await controller.clockIn('test-label2', {
 					locals: { token: { user: { email: user.email } } },
 				});
 				expect(response.success).toBe(true);
 				expect(response.time).toBeDefined();
 				expect(response.time.id).toBeDefined();
 				expect(response.time.endTime).toBeNull();
-				expect(response.time.label).toBe('test-label');
-				// expect(user.times.length).toBeGreaterThanOrEqual(2);
+				expect(response.time.label).toBe('test-label2');
+				await response.time.destroy();
 			});
-			it('should throw unauthorized error', () => {
-				controller
-					// @ts-ignore mock logged out user
-					.clockIn('test-label', {
-						locals: { token: null },
-					})
-					.catch(error => {
-						expect(error).toBeDefined();
-						expect(error.response.statusCode).toBe(401);
-						expect(error.response.error).toBe('Unauthorized');
-					});
+			it('should throw unauthorized error', async () => {
+				let response;
+				try {
+					response = await controller
+						// @ts-ignore mock logged out user
+						.clockIn('test-label', {
+							locals: { token: null },
+						});
+				} catch (error) {
+					expect(error).toBeDefined();
+					expect(error.response.statusCode).toBe(401);
+					expect(error.response.error).toBe('Unauthorized');
+				}
+				expect(response).not.toBeDefined();
 			});
 
 			it('should throw bad request error', async () => {
-				const unfinishedTime = await timeService.create({
+				unfinishedTime = await timeService.create({
+					label: 'somelabel',
 					startTime: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
-					endTime: null,
 				});
 				await user.addTime(unfinishedTime);
-
-				controller
-					// @ts-ignore mock logged in user
-					.clockIn('test-label', {
-						locals: { token: { user: { email: user.email } } },
-					})
-					.catch(error => {
-						expect(error).toBeDefined();
-						expect(error.response.statusCode).toBe(400);
-						expect(error.response.error).toBe('Bad request');
-					});
+				console.log(user)
+				let response;
+				try {
+					response = await controller
+						// @ts-ignore mock logged in user
+						.clockIn('test-label', {
+							locals: { token: { user: { email: user.email } } },
+						});
+				} catch (error) {
+					expect(error).toBeDefined();
+					expect(error.response.statusCode).toBe(400);
+					expect(error.response.error).toBe('Bad Request');
+				}
+				expect(response).not.toBeDefined();
+				await unfinishedTime.destroy();
 			});
 		});
 		describe('path /time/clock-out/:timerId (POST)', () => {
@@ -134,16 +143,20 @@ describe('Time Controller', () => {
 				});
 				await user.addTime(unfinishedTime);
 			});
-			it('should throw bad request error', () => {
+			afterEach(async () => {
+				await unfinishedTime.destroy();
+			});
+			it('should throw bad request error', async () => {
 				// wrong time id
-				controller
-					.clockOut('7565d992-ce3b-467a-b558-dcb4fccc3329')
-					.catch(error => {
-						console.log(error);
-						expect(error).toBeDefined();
-						expect(error.response.statusCode).toBe(400);
-						expect(error.response.error).toBe('Bad request');
-					});
+				let response;
+				try {
+					response = await controller.clockOut('7565d992-ce3b-467a-b558-dcb4fccc3329');
+				} catch (error) {
+					expect(error).toBeDefined();
+					expect(error.response.statusCode).toBe(400);
+					expect(error.response.error).toBe('Bad Request');
+				}
+				expect(response).not.toBeDefined();
 			});
 			it('should return finished time object', async () => {
 				const response = await controller.clockOut(unfinishedTime.id);

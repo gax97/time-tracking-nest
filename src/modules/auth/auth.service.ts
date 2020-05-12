@@ -17,8 +17,8 @@ export class AuthService {
 
 	}
 
-	createClient(){
-		return this.clientModel.create({})
+	createClient(data){
+		return this.clientModel.create(data)
 	}
 	/**
 	 * Find single client.

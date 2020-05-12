@@ -25,14 +25,14 @@ describe('AuthService', () => {
 		const module: TestingModule = await getTestingModule();
 
 		service = module.get<AuthService>(AuthService);
-		client = await service.createClient();
+		client = await service.createClient({id: 'someClient'});
 	});
 
 	it('should be defined', () => {
 		expect(service).toBeDefined();
 	});
 	it('should create a client', async () => {
-		const client = await service.createClient();
+		const client = await service.createClient({id: 'randomclientid'});
 		expect(client).toBeDefined();
 		expect(client.id).toBeDefined();
 	});
