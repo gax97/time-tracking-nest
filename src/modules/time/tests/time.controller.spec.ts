@@ -112,12 +112,8 @@ describe('Time Controller', () => {
 			});
 
 			it('should throw bad request error', async () => {
-				unfinishedTime = await timeService.create({
-					label: 'somelabel',
-					startTime: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
-				});
-				await user.addTime(unfinishedTime);
-				console.log(user)
+				// @ts-ignore
+				jest.spyOn(userService, 'getUserByEmailWithStartTime').mockImplementation(()=>({times: ['time1', 'time2']}))
 				let response;
 				try {
 					response = await controller
@@ -131,7 +127,6 @@ describe('Time Controller', () => {
 					expect(error.response.error).toBe('Bad Request');
 				}
 				expect(response).not.toBeDefined();
-				await unfinishedTime.destroy();
 			});
 		});
 		describe('path /time/clock-out/:timerId (POST)', () => {

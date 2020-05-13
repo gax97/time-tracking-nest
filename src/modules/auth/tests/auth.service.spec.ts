@@ -21,20 +21,24 @@ const getTestingModule = () => {
 describe('AuthService', () => {
 	let service: AuthService;
 	let client: OAuthClient;
-	beforeEach(async () => {
+	beforeAll(async () => {
 		const module: TestingModule = await getTestingModule();
-
 		service = module.get<AuthService>(AuthService);
-		client = await service.createClient({id: 'someClient'});
+		client = await service.createClient( {clientSecret: "secret", grants: ["password", "refresh_token"]});
 	});
+
+	afterAll(()=>{
+		return client.destroy()
+	})
 
 	it('should be defined', () => {
 		expect(service).toBeDefined();
 	});
 	it('should create a client', async () => {
-		const client = await service.createClient({id: 'randomclientid'});
+		const client = await service.createClient({clientSecret: "secret", grants: ["password", "refresh_token"]});
 		expect(client).toBeDefined();
 		expect(client.id).toBeDefined();
+		return client.destroy();
 	});
 	it('should return existing client', async () => {
 		const foundClient = await service.getClient(client.id);

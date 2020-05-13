@@ -50,7 +50,6 @@ export class TimeController {
 		const user = await this.userService.getUserByEmailWithStartTime(
 			currentUserEmail,
 		);
-		console.log(user.times)
 		if (user.times.length > 0) {
 			throw new BadRequestException('User is already clocked in');
 		}
