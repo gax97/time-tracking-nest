@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from '../auth.controller';
+import { AuthController, SignUpParameters } from '../auth.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthService } from '../auth.service';
 import { UsersService } from '../../user/user.service';
@@ -13,8 +13,12 @@ describe('Auth Controller', () => {
 	let controller: AuthController;
 	let authService;
 	let userService;
-	let client;
-	const email = 'useremail123@email.com'
+	const userData: SignUpParameters = {
+		email: 'email@email.com',
+		fullName: 'mike',
+		password: 'somepassword',
+		clientId: 'application',
+	};
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [AuthController],
@@ -30,14 +34,56 @@ describe('Auth Controller', () => {
 		controller = module.get<AuthController>(AuthController);
 		authService = module.get<AuthService>(AuthService);
 		userService = module.get<UsersService>(UsersService);
-		// client = await authService.createClient( {id: "application", clientSecret: "secret", grants: ["password", "refresh_token"]});
 	});
 
 	it('should be defined', () => {
 		expect(controller).toBeDefined();
 	});
+	it('should have sign-up, sign-in and sign-out methods', ()=>{
+		expect(controller.signUp).toBeDefined();
+		expect(controller.signIn).toBeDefined();
+		expect(controller.signOut).toBeDefined();
+	})
 
-	// describe('sign up route /auth/sign-up (POST)', () => {
-	//
-	// });
+	describe('sign up route /auth/sign-up (POST)', () => {
+		it('should create a new user', async () => {
+			jest.spyOn(authService, 'getClient').mockImplementation(() => 'client');
+			jest.spyOn(userService, 'getUserByEmail').mockImplementation(() => null);
+			jest.spyOn(userService, 'create').mockImplementation(data => data);
+
+			const response = await controller.signUp(userData);
+			expect(response.success).toBe(true);
+			expect(response.message).toBe('ok');
+		});
+
+		it('should throw error when no client is found', async () => {
+			jest.spyOn(authService, 'getClient').mockImplementation(() => null);
+			expect.assertions(3);
+			try {
+				await controller.signUp(userData);
+			} catch (error) {
+				expect(error).toBeDefined();
+				expect(error.response.message).toBe('OAuth client not found');
+				expect(error.response.statusCode).toBe(404);
+			}
+		});
+
+		it('should throw error when user already exists', async () => {
+			jest.spyOn(authService, 'getClient').mockImplementation(() => 'client');
+			jest
+				.spyOn(userService, 'getUserByEmail')
+				.mockImplementation(() => 'user');
+			expect.assertions(3);
+			try {
+				await controller.signUp(userData);
+			} catch (error) {
+				expect(error).toBeDefined();
+				expect(error.response.message).toBe('User already exists');
+				expect(error.response.statusCode).toBe(400);
+			}
+		});
+	});
+
+	// TODO test sign-in and sign-out in E2E testing!
+
 });

@@ -14,7 +14,7 @@ import { oauth } from '../../lib/oauth';
 
 import { Request, Response } from 'express';
 
-class SignUpParameters{
+export class SignUpParameters{
 	@IsEmail()
 	@IsNotEmpty()
 	email: string;
