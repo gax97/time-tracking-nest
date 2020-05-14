@@ -6,14 +6,12 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { configService } from '../../../shared/services/config.service';
 import { Time } from '../../../shared/models/times.model';
 import { User } from '../../../shared/models/user.model';
-import { NestApplication } from '@nestjs/core';
 import moment = require('moment');
-
 describe('Time Controller', () => {
 	let controller: TimeController;
-	let app: NestApplication;
 	let userService: UsersService;
 	let timeService: TimeService;
+
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [TimeController],
@@ -29,13 +27,10 @@ describe('Time Controller', () => {
 		controller = module.get<TimeController>(TimeController);
 		userService = module.get<UsersService>(UsersService);
 		timeService = module.get<TimeService>(TimeService);
-		app = module.createNestApplication();
-		await app.init();
 	});
 
 	it('should be defined', () => {
 		expect(controller).toBeDefined();
-		expect(app).toBeDefined();
 		expect(userService).toBeDefined();
 		expect(timeService).toBeDefined();
 	});

@@ -1,10 +1,26 @@
 import moment = require('moment');
+import {
+	TimeMockData,
+	TimeMockDataHigher,
+	TimeMockDataLower,
+	TimeMockDataWithoutEndTime,
+} from '../../../data/mockData/Time';
+import { UserMockData } from '../../../data/mockData/User';
 
 export const TimeModelMock = {
 	create: data => data,
-	findOne: () => ({ id: 123, startTime: 'sss', endTime: 'endTime' }),
+	findOne: () => TimeMockDataWithoutEndTime,
 	findAll: () => [
-		{ id: 321, startTime: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ'), endTime: 'endTime' },
-		{ id: 123, startTime: moment().add(-2, 'day').format('YYYY-MM-DDTHH:mm:ss.SSSZ'), endTime: 'endTime' },
+		TimeMockDataHigher,
+		TimeMockDataLower,
 	],
+};
+export const UserModelMock = {
+	create: data => data,
+	findOne: () => UserMockData,
+	findAll: () => [
+		TimeMockDataHigher,
+		TimeMockDataLower,
+	],
+	addTime: ()=> ({}),
 };

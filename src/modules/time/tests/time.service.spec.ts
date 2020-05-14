@@ -4,10 +4,10 @@ import { getModelToken } from '@nestjs/sequelize';
 import { Time } from '../../../shared/models/times.model';
 import moment = require('moment');
 import { TimeModelMock } from '../../../shared/models/mockModels/index.js';
+import { TimeMockData } from '../../../data/mockData/Time';
 
 describe('TimeService', () => {
 	let service: TimeService;
-	const dummyStartTime = moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
@@ -25,27 +25,15 @@ describe('TimeService', () => {
 		expect(service).toBeDefined();
 	});
 	it('should create a time', async () => {
-		const time = await service.create({
-			startTime: dummyStartTime,
-			label: 'test-label',
-		});
-		expect(time).toBeDefined();
-		expect(time.startTime).toBeDefined();
-		expect(time.label).toEqual('test-label');
+		const time = await service.create(TimeMockData);
+		expect(time).toBe(TimeMockData);
 	});
 
 	describe('getTimeFromId', () => {
 		it('should return found time', async () => {
-			jest.spyOn(TimeModelMock, 'findOne').mockImplementation(() => ({
-				id: 123123123,
-				label: 'test-label',
-				startTime: 'startTime',
-				endTime: 'endTime',
-			}));
-			const foundTime = await service.getTimeFromId(123123123);
-			expect(foundTime).toBeDefined();
-			expect(foundTime.id).toEqual(123123123);
-			expect(foundTime.label).toEqual('test-label');
+			jest.spyOn(TimeModelMock, 'findOne').mockImplementation(() => TimeMockData);
+			const foundTime = await service.getTimeFromId(TimeMockData.id);
+			expect(foundTime).toBe(TimeMockData);
 		});
 		it('should return null', async () => {
 			jest.spyOn(TimeModelMock, 'findOne').mockImplementation(() => null);
