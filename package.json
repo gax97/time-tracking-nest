@@ -24,7 +24,7 @@
   "dependencies": {
     "@nestjs/common": "^7.0.6",
     "@nestjs/core": "^7.0.6",
-    "@nestjs/platform-express": "^7.0.6",
+    "@nestjs/platform-express": "^9.2.1",
     "@nestjs/sequelize": "^0.1.0",
     "@types/bcrypt": "^3.0.0",
     "@types/oauth2-server": "^3.0.12",
